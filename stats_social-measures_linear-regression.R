@@ -6,6 +6,7 @@ df <- read.csv('/directory/file_name.csv', header=TRUE, stringsAsFactors=TRUE, n
 ### Models for SFS score
 df$SFS[df$SFS == 'empty'] <- NA
 df_SFSsubset <- subset(df, !is.na(df$SFS))
+df_SFSsubset <- subset(df_SFSsubset, !is.na(df_SFSsubset$LABEL))
 df_SFSsubset$SFS <- as.numeric(as.character(df_SFSsubset$SFS))
 df_SFSsubset$LONELINESS <- as.numeric(as.character(df_SFSsubset$LONELINESS))
 df_SFSsubset$AGE <- as.numeric(as.character(df_SFSsubset$AGE))
@@ -43,6 +44,7 @@ write.table(all_SFS_models, file = "/directory/file_name.txt", sep = ",", quote 
 ### Models for LONELINESS score
 df$LONELINESS[df$LONELINESS == 'empty'] <- NA
 df_LONELINESSsubset <- subset(df, !is.na(df$LONELINESS))
+df_LONELINESSsubset <- subset(df_LONELINESSsubset, !is.na(df_LONELINESSsubset$LABEL))
 df_LONELINESSsubset$LONELINESS <- as.numeric(as.character(df_LONELINESSsubset$LONELINESS))
 df_LONELINESSsubset$AGE <- as.numeric(as.character(df_LONELINESSsubset$AGE))
 model_all_testing <- lm(LONELINESS ~ dwell_times_state1 + AGE, data = df_LONELINESSsubset)

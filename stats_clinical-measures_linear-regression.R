@@ -6,6 +6,7 @@ df <- read.csv('/directory/file_name.csv', header=TRUE, stringsAsFactors=TRUE, n
 ### Models for MMSE score
 df$MMSE_TOT[df$MMSE_TOT == 'empty'] <- NA  # non AD or HC participants
 df_MMSEsubset <- subset(df, !is.na(df$MMSE_TOT))
+df_MMSEsubset <- subset(df_MMSEsubset, !is.na(df_MMSEsubset$LABEL)) 
 df_MMSEsubset$MMSE_TOT <- as.numeric(as.character(df_MMSEsubset$MMSE_TOT))
 df_MMSEsubset$AGE <- as.numeric(as.character(df_MMSEsubset$AGE))
 model <- lm(MMSE_TOT ~ dwell_times_state1 + AGE, data = df_MMSEsubset)
